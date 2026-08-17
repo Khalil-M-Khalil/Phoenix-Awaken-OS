@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Phoenix Awaken OS style reminder: explicit local targets, no uploads, no
+# destructive actions, and redacted machine-readable reports.
+
+usage() {
+  cat <<'EOF'
+Usage: phoenix-security-check --target PATH [--out DIR] [--yara-rules FILE]
+
+Runs local, non-destructive supply-chain and file checks. The target must be
+owned by the operator or explicitly authorised for assessment. Network access is not required by this wrapper; Grype database updates are intentionally left
+to a separate, explicit maintenance action.
+EOF
+}
+
+target=""
+out=""
+yara_rules=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --target) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; target="$2"; shift 2 ;;
+    --out) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; out="$2"; shift 2 ;;
+    --yara-rules) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; yara_rules="$2"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown argument: $1" >&2; usage >&2; exit 2 ;;
+  esac
+done
+
+[[ -n "$target" ]] || { echo "--target is required" >&2; usage >&2; exit 2; }
+[[ -e "$target" ]] || { echo "Target does not exist: $target" >&2; exit 1; }
+
+target="$(realpath -- "$target")"
+if [[ -z "$out" ]]; then
+  out="./phoenix-security-report-$(date -u +%Y%m%dT%H%M%SZ)"
+fi
+mkdir -p -- "$out"
+out="$(realpath -- "$out")"
+
+scope="dir:${target}"
+status=0
+
+if command -v syft >/dev/null 2>&1; then
+  syft "$scope" -o json="$out/syft-sbom.json" || status=1
+else
+  printf '%s\n' '{"status":"skipped","reason":"syft-not-installed"}' > "$out/syft-sbom.json"
+fi
+
+if command -v grype >/dev/null 2>&1; then
+  GRYPE_DB_AUTO_UPDATE=false GRYPE_CHECK_FOR_APP_UPDATE=false grype "$scope" -o json --file "$out/grype-vulnerabilities.json" || status=1
+else
+  printf '%s\n' '{"status":"skipped","reason":"grype-not-installed"}' > "$out/grype-vulnerabilities.json"
+fi
+
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks dir --redact --report-format json --report-path "$out/gitleaks.json" -- "$target" || {
+    # A finding is a reportable result, not a wrapper failure.
+    [[ -f "$out/gitleaks.json" ]] || status=1
+  }
+else
+  printf '%s\n' '{"status":"skipped","reason":"gitleaks-not-installed"}' > "$out/gitleaks.json"
+fi
+
+if [[ -n "$yara_rules" ]]; then
+  [[ -f "$yara_rules" ]] || { echo "YARA rules file does not exist: $yara_rules" >&2; exit 1; }
+  if command -v yara >/dev/null 2>&1; then
+    yara -r -- "$yara_rules" "$target" > "$out/yara-matches.txt" || {
+      code=$?
+      [[ "$code" -eq 1 ]] || status=1
+    }
+  else
+    printf '%s\n' 'YARA skipped: yara-not-installed' > "$out/yara-matches.txt"
+  fi
+else
+  printf '%s\n' 'YARA skipped: no rules supplied' > "$out/yara-matches.txt"
+fi
+
+{
+  printf '{\n'
+  printf '  "schema": "phoenix-security-report-0.1",\n'
+  printf '  "target": %s,\n' "$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$target")"
+  printf '  "created_at_utc": %s,\n' "$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$(date -u +%Y-%m-%dT%H:%M:%SZ)")"
+  printf '  "network_upload": false,\n'
+  printf '  "reports": [\n'
+  first=1
+  for report in "$out"/*; do
+    [[ "$(basename "$report")" == "run.json" ]] && continue
+    [[ -f "$report" ]] || continue
+    [[ $first -eq 1 ]] || printf ',\n'
+    first=0
+    printf '    {"file": %s, "sha256": %s}' \
+      "$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$(basename "$report")")" \
+      "$(sha256sum "$report" | awk '{print $1}' | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().strip()))')"
+  done
+  printf '\n  ]\n}\n'
+} > "$out/run.json"
+
+printf 'Phoenix security report written to %s\n' "$out"
+exit "$status"

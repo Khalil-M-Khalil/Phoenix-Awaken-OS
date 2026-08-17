@@ -6,6 +6,12 @@
 # sandbox with Podman; ISO conversion remains a separate, later step.
 
 ARG FEDORA_VERSION=44
+ARG SYFT_VERSION=1.51.0
+ARG GRYPE_VERSION=0.117.0
+ARG GITLEAKS_VERSION=8.30.1
+ARG SYFT_SHA256=2a2e837a2c8d59ec9af5472ee22d3b04ee463c4e44476ecf993fd1e5ab6ebc7f
+ARG GRYPE_SHA256=38525dab1e06f162ebaa02f94d82d1f807076b011a44180cf2777edf1a7b9c26
+ARG GITLEAKS_SHA256=551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
 # Fedora bootc is the verified public base used for the first image build.
 # The KDE layer is installed explicitly so the composition remains auditable.
 FROM quay.io/fedora/fedora-bootc:${FEDORA_VERSION}
@@ -27,6 +33,8 @@ RUN dnf -y install \
       python3-cryptography \
       python3-tkinter \
       python3-pytest \
+      curl \
+      yara \
       nodejs \
       npm \
       selinux-policy-targeted \
@@ -49,8 +57,24 @@ COPY packaging/phoenix-osint /usr/bin/phoenix-osint
 COPY packaging/phoenix-osint.desktop /usr/share/applications/phoenix-osint.desktop
 COPY packaging/phoenix-aether /usr/bin/phoenix-aether
 COPY packaging/phoenix-aether.desktop /usr/share/applications/phoenix-aether.desktop
+COPY security/phoenix-security-check /usr/bin/phoenix-security-check
+COPY security/phoenix-security-update-db /usr/bin/phoenix-security-update-db
+COPY docs/tooling-roadmap-ar.md /usr/share/doc/phoenix-awaken-os/tooling-roadmap-ar.md
 
-RUN chmod 0755 /usr/bin/phoenix-capsule /usr/bin/phoenix-aether /usr/bin/phoenix-osint \
+RUN chmod 0755 /usr/bin/phoenix-capsule /usr/bin/phoenix-aether /usr/bin/phoenix-osint /usr/bin/phoenix-security-check /usr/bin/phoenix-security-update-db \
+      && curl -fsSL -o /tmp/syft.tgz "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_amd64.tar.gz" \
+      && echo "${SYFT_SHA256}  /tmp/syft.tgz" | sha256sum -c - \
+      && tar -xzf /tmp/syft.tgz -C /tmp syft \
+      && install -m 0755 /tmp/syft /usr/local/bin/syft \
+      && curl -fsSL -o /tmp/grype.tgz "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz" \
+      && echo "${GRYPE_SHA256}  /tmp/grype.tgz" | sha256sum -c - \
+      && tar -xzf /tmp/grype.tgz -C /tmp grype \
+      && install -m 0755 /tmp/grype /usr/local/bin/grype \
+      && curl -fsSL -o /tmp/gitleaks.tgz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+      && echo "${GITLEAKS_SHA256}  /tmp/gitleaks.tgz" | sha256sum -c - \
+      && tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks \
+      && install -m 0755 /tmp/gitleaks /usr/local/bin/gitleaks \
+      && rm -f /tmp/syft.tgz /tmp/grype.tgz /tmp/gitleaks.tgz /tmp/syft /tmp/grype /tmp/gitleaks \
       && python3 -m pip install --no-cache-dir --no-compile /opt/phoenix-awaken/osint \
       && python3 -m compileall -q /opt/phoenix-awaken/capsule /opt/phoenix-awaken/osint \
       && python3 -m pytest -q /opt/phoenix-awaken/osint/tests \
