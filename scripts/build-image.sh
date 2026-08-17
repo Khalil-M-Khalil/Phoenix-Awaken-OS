@@ -27,9 +27,10 @@ podman build --file "${ROOT_DIR}/Containerfile" --tag "${IMAGE}" "${ROOT_DIR}"
 podman run --rm --privileged \
   -v "${OUTPUT_DIR}:/output" \
   -v /var/lib/containers/storage:/var/lib/containers/storage \
-  quay.io/bootc-org/bootc-image-builder:latest \
+  quay.io/centos-bootc/bootc-image-builder:latest \
   --type qcow2 \
-  --local \
+  --use-librepo=True \
+  --rootfs ext4 \
   "${IMAGE}"
 
 printf 'Image artifacts are under %s\n' "${OUTPUT_DIR}"
