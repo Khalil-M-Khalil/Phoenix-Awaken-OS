@@ -40,3 +40,29 @@ def test_capsule_rejects_empty_decision() -> None:
     capsule = EvidenceCapsule("Decision test")
     with pytest.raises(ValueError, match="Decision"):
         capsule.add_decision("  ")
+
+
+def test_capsule_can_reopen_verify_and_record_transfer(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence.bin"
+    evidence.write_bytes(b"phoenix-aether-proof")
+    capsule = EvidenceCapsule("Reopenable case")
+    item = capsule.add_file(evidence, source="local")
+    capsule.add_transfer(item.name, item.sha256, item.size_bytes, "outgoing")
+    json_path = capsule.export_json(tmp_path / "capsule.json")
+
+    reopened = EvidenceCapsule.load_json(json_path)
+    results = reopened.verify_items()
+
+    assert results[0]["status"] == "verified"
+    assert any(event.event_type == "aether-transfer" for event in reopened.events)
+    assert reopened.schema_version == "0.2"
+
+
+def test_verify_marks_changed_evidence(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence.txt"
+    evidence.write_text("original", encoding="utf-8")
+    capsule = EvidenceCapsule("Changed case")
+    capsule.add_file(evidence)
+    evidence.write_text("modified", encoding="utf-8")
+
+    assert capsule.verify_items()[0]["status"] == "changed"

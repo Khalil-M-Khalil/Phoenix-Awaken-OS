@@ -1,0 +1,16 @@
+PHOENIX AETHER — LICENSE AND OWNERSHIP NOTICE
+
+Copyright © 2026 Khalil Mohammad Khalil. All rights reserved.
+
+Phoenix Aether is an independent software project created and maintained by Khalil Mohammad Khalil. This preview release is provided for authorized use, evaluation, and transfer testing.
+
+You may install and use the application for legitimate file-transfer purposes. You may not modify, repackage, redistribute, sell, or present the application or its code as your own without prior written authorization from the creator.
+
+Authorized development, collaboration, modification, or redistribution requests should be sent to:
+Email: khalilmkhalil0937@gmail.com
+Instagram: https://instagram.com/khalil_m_khalil09
+WhatsApp: https://wa.me/khalil_m_khalil0
+
+The application uses integrity verification to detect unauthorized changes. When a packaged release fails verification, it may stop safely and show an ownership notice. It does not delete user files, block IP addresses, or alter personal data.
+
+By continuing, you acknowledge this ownership notice and agree to use Phoenix Aether responsibly.

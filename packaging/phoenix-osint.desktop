@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Phoenix
+GenericName=Authorised OSINT Workbench
+Comment=Local-first phone metadata and authorised OSINT analysis
+Exec=/usr/bin/phoenix-osint
+Icon=phoenix
+Terminal=false
+Categories=Security;Utility;
+StartupNotify=true
+Keywords=OSINT;phone;security;investigation;
+

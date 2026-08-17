@@ -16,8 +16,10 @@ The prototype can create a local case, hash evidence incrementally with SHA-256,
 | Risk/control identifiers | Implemented |
 | Timeline and decisions | Implemented |
 | JSON and Markdown export | Implemented |
-| Phoenix Aether transfer linkage | Planned |
-| KDE desktop integration | Planned |
+| Phoenix OSINT desktop integration | Integrated into image build |
+| Phoenix Aether transfer linkage | Integrated into image build |
+| Evidence Capsule provenance workflow | Integrated |
+| KDE desktop integration | In progress |
 | Fedora Atomic image | Planned |
 | Live USB and installer | Planned |
 
@@ -34,11 +36,23 @@ python3 -m capsule.cli "First local case" ./sample.txt \
 
 The command writes `capsule.json` and `capsule.md` under the selected output directory. The implementation is local-only and is intended for synthetic fixtures during this first milestone.
 
+## Unified Phoenix Workbench
+
+The planned desktop image brings together three related workflows. **Phoenix** is the authorised, local-first OSINT workbench for phone-number metadata and explicitly permitted enrichment. **Phoenix Aether** handles local transfer and links transfer metadata to evidence cases. **Evidence Capsule** preserves provenance, SHA-256 fingerprints, trust context, decisions, and exportable reports.
+
+These components are deliberately separated by responsibility. Phoenix OSINT does not treat an enrichment result as proof; its reports must retain source, timestamp, status, confidence, and limitations. Aether does not silently upload files. Evidence Capsule stores verifiable metadata and operator decisions rather than pretending that a hash alone proves safety.
+
+Inside the Fedora image, Phoenix OSINT is exposed as the `Phoenix` KDE application and `/usr/bin/phoenix-osint` launcher. Aether is exposed as `Phoenix Aether`, and the capsule CLI remains available as `phoenix-capsule`. Network enrichment stays opt-in and no provider secret is embedded in the image.
+
+## Security Validation
+
+Strix is used outside the default desktop as an isolated qualification tool against Phoenix-owned components and disposable test fixtures. It is not bundled as an always-on offensive capability. Findings must be reproduced, remediated, and converted into regression tests before a release candidate is considered ready.
+
 ## Design Principles
 
 Phoenix Awaken OS treats provenance as a first-class desktop concept. A file is not merely opened or moved; the user can state its trust context, preserve its fingerprint, connect it to a risk or control, and explain the decision that followed. The system must remain explicit about persistence, privacy boundaries, and limitations.
 
-The operating system will be built only after this vertical slice is useful and tested. The initial target base is Fedora Atomic KDE/Kinoite, but no ISO is claimed to exist yet. The first image will be tested in a virtual machine before any USB writing or installation on physical hardware.
+The operating system will be built only after this vertical slice is useful and tested. The initial target base is Fedora Atomic KDE/Kinoite, but the current bootc container image is the validated artifact; ISO conversion remains blocked by the constrained sandbox's missing EFI/vfat and device-mount capabilities. The first valid ISO will be tested in a virtual machine before any USB writing or installation on physical hardware.
 
 ## Security Boundaries
 

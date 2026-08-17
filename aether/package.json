@@ -1,0 +1,67 @@
+{
+  "name": "phoenix-aether",
+  "version": "0.1.0",
+  "description": "Offline optical file handoff for Windows — screen-to-camera QR transfer.",
+  "main": "main.cjs",
+  "private": true,
+  "author": "Khalil Mohammad Khalil <khalilmkhalil0937@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "pack:win": "electron-builder --win portable",
+    "dist:win": "electron-builder --win",
+    "lint:quick": "node --check main.cjs && node --check preload.cjs && node --check renderer/app.js"
+  },
+  "build": {
+    "appId": "com.khalilmohammadkhalil.phoenixaether",
+    "productName": "Phoenix Aether",
+    "asar": true,
+    "copyright": "Copyright © 2026 Khalil Mohammad Khalil",
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "assets/phoenix-aether.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Phoenix Aether",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerIcon": "assets/phoenix-aether.ico",
+      "uninstallerIcon": "assets/phoenix-aether.ico",
+      "installerHeader": "assets/installer-header.bmp",
+      "installerSidebar": "assets/installer-sidebar.bmp",
+      "artifactName": "Phoenix-Aether-Setup-${version}.exe"
+    }
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  }
+}

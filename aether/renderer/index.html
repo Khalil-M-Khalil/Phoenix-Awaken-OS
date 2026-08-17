@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'none';" />
+    <title>Phoenix Aether — Offline Optical Transfer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <p class="eyebrow">OFFLINE OPTICAL HANDOFF</p>
+            <h1>Phoenix Aether</h1>
+          </div>
+        </div>
+        <div class="status-chip"><i></i><span id="system-status">Local-only mode</span></div>
+      </header>
+
+      <section class="mission-card">
+        <div>
+          <p class="eyebrow">WINDOWS PREVIEW · 0.1.0</p>
+          <h2>Move a file through light — not a network.</h2>
+          <p>One device emits animated QR frames. Another scans them through its camera and verifies the reconstructed file with SHA-256.</p>
+        </div>
+          <aside>
+            <strong>Local Wi-Fi handoff</strong>
+            <span>No internet required</span>
+            <span>No cloud account</span>
+          </aside>
+      </section>
+
+      <nav class="mode-tabs" aria-label="Transfer mode">
+        <button class="mode-tab active" data-mode="send">Emit</button>
+        <button class="mode-tab" data-mode="receive">Receive</button>
+        <button class="mode-tab" data-mode="guide">Field guide</button>
+        <button class="mode-tab" data-mode="capsule">Evidence Capsule</button>
+        <button class="mode-tab" data-mode="about">About</button>
+      </nav>
+
+      <section class="workspace">
+        <section class="panel mode-panel active" id="send-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">01 · EMITTER</p>
+              <h3>Prepare an optical stream</h3>
+            </div>
+            <span class="mono" id="sender-session">NO SESSION</span>
+          </div>
+
+          <div class="file-stage" id="file-stage">
+            <div class="control-row">
+              <button class="file-select" id="select-file">Select files</button>
+              <button class="secondary" id="select-folder">Select folder</button>
+            </div>
+            <p id="file-label">Choose one or more files, or an entire folder. Multiple items are packaged as a ZIP locally.</p>
+          </div>
+
+          <div class="meta-grid" id="send-meta" hidden>
+            <div><span>Payload</span><strong id="send-file-name">—</strong></div>
+            <div><span>Size</span><strong id="send-file-size">—</strong></div>
+            <div><span>Frames</span><strong id="send-frame-count">—</strong></div>
+            <div><span>SHA-256</span><strong class="hash" id="send-hash">—</strong></div>
+          </div>
+
+          <div class="warning-box" id="local-transfer" hidden>
+            <strong>Fast local handoff</strong>
+            <p>Connect the other device to this computer's Wi-Fi or hotspot, then open this link in its browser:</p>
+            <p><code id="local-url">—</code></p>
+            <div class="control-row"><button class="secondary" id="copy-local-url">Copy local link</button></div>
+          </div>
+
+          <div class="qr-stage" id="qr-stage" hidden>
+            <canvas id="qr-canvas" width="820" height="820" aria-label="Animated QR optical stream"></canvas>
+            <div class="qr-overlay"><span id="frame-indicator">FRAME 0 / 0</span><span id="send-rate">0 fps</span></div>
+          </div>
+
+          <div class="control-row">
+            <button class="primary" id="start-stream" disabled>Ignite stream</button>
+            <button class="secondary" id="stop-stream" disabled>Stop</button>
+          </div>
+          <p class="notice">Multiple items are bundled locally as a ZIP with safe relative paths. Fast handoff uses the local network only; QR remains available as a visual fallback.</p>
+        </section>
+
+        <section class="panel mode-panel" id="receive-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">02 · RECEIVER</p>
+              <h3>Capture and reconstruct</h3>
+            </div>
+            <span class="mono" id="receive-session">WAITING</span>
+          </div>
+
+          <div class="camera-stage">
+            <video id="camera" autoplay muted playsinline></video>
+            <canvas id="scan-canvas" hidden></canvas>
+            <div class="camera-reticle"><span></span><span></span><span></span><span></span></div>
+            <p id="camera-message">Camera is idle.</p>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-label"><span id="receive-progress">0 / 0 unique frames</span><span id="receive-percent">0%</span></div>
+            <div class="progress-track"><div id="progress-bar"></div></div>
+          </div>
+
+          <div class="meta-grid compact">
+            <div><span>Integrity</span><strong id="integrity-status">Not checked</strong></div>
+            <div><span>File</span><strong id="receive-file-name">—</strong></div>
+          </div>
+
+          <div class="control-row">
+            <button class="primary" id="start-camera">Start camera</button>
+            <button class="secondary" id="stop-camera" disabled>Stop camera</button>
+            <button class="secondary" id="save-file" disabled>Save verified file</button>
+          </div>
+          <p class="notice">Keep the sender display bright and steady. The preview repeats frames until the receiver collects every chunk.</p>
+        </section>
+
+        <section class="panel mode-panel" id="guide-panel">
+          <div class="panel-heading"><div><p class="eyebrow">FIELD GUIDE</p><h3>Test the light path</h3></div></div>
+          <ol class="guide-list">
+            <li><b>Emitter:</b> select any file type and ignite the stream. The file stays local.</li>
+            <li><b>Receiver:</b> open Phoenix Aether on a second device, choose Receive, and start its camera.</li>
+            <li><b>Alignment:</b> point the camera at the animated QR. Keep the QR square fully inside the reticle.</li>
+            <li><b>Verification:</b> wait for the green SHA-256 match, then save the reconstructed file.</li>
+          </ol>
+          <div class="warning-box"><strong>Transfer notes</strong><p>Files are transferred as binary-safe QR frames with no extension or artificial file-size restriction. Larger files generate more frames and therefore take longer and use more memory. This build verifies integrity with SHA-256 but does not provide encryption or forward-error correction yet.</p></div>
+        </section>
+
+        <section class="panel mode-panel" id="capsule-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">03 · EVIDENCE-FIRST</p><h3>Build a local proof trail</h3></div>
+            <span class="mono" id="capsule-status">LOCAL ONLY</span>
+          </div>
+          <div class="capsule-layout">
+            <form class="capsule-form" id="capsule-form">
+              <label>Case title<input id="capsule-title" required maxlength="120" placeholder="Example: Suspicious file handoff" /></label>
+              <div class="form-grid">
+                <label>Trust level<select id="capsule-trust"><option value="review">Review</option><option value="trusted">Trusted</option><option value="untrusted">Untrusted</option></select></label>
+                <label>Control ID<input id="capsule-control" maxlength="40" placeholder="A.8.15" /></label>
+              </div>
+              <label>Risk ID<input id="capsule-risk" maxlength="40" placeholder="RISK-001" /></label>
+              <label>Decision<textarea id="capsule-decision" rows="3" placeholder="What should happen next?"></textarea></label>
+              <button class="primary" type="submit">Create local capsule</button>
+            </form>
+            <div class="capsule-console">
+              <div class="capsule-console-head"><strong>Local cases</strong><button class="secondary" id="refresh-capsules" type="button">Refresh</button></div>
+              <div id="capsule-list" class="capsule-list"><p class="notice">No capsules loaded yet.</p></div>
+            </div>
+          </div>
+          <div class="warning-box" id="capsule-detail" hidden>
+            <strong id="capsule-detail-title">No capsule selected</strong>
+            <p id="capsule-detail-meta">Create a local capsule, then record outgoing transfers from the Emit tab.</p>
+            <div class="control-row"><button class="secondary" id="add-current-evidence" type="button" disabled>Add armed payload as evidence</button><button class="secondary" id="verify-capsule" type="button" disabled>Verify evidence paths</button></div>
+            <pre id="capsule-detail-output" class="capsule-output"></pre>
+          </div>
+          <p class="notice">Capsules are stored locally under your Documents folder. Phoenix Aether does not upload case data or evidence.</p>
+        </section>
+
+        <section class="panel mode-panel" id="about-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">PHOENIX AETHER · CREATOR</p>
+              <h3>Built by Khalil Mohammad Khalil</h3>
+            </div>
+            <span class="mono">© 2026</span>
+          </div>
+          <div class="creator-card">
+            <div>
+              <p class="creator-lead">Phoenix Aether is an independent offline transfer tool created and developed by Khalil Mohammad Khalil.</p>
+              <p class="notice">Copyright © 2026 Khalil Mohammad Khalil. All rights reserved.</p>
+            </div>
+            <div class="creator-links" aria-label="Creator contact links">
+              <button class="contact-link" data-external-url="https://instagram.com/khalil_m_khalil09"><span>Instagram</span><small>@khalil_m_khalil09</small></button>
+              <button class="contact-link" data-external-url="https://wa.me/khalil_m_khalil0"><span>WhatsApp</span><small>Message the creator</small></button>
+              <button class="contact-link" data-external-url="mailto:khalilmkhalil0937@gmail.com"><span>Email</span><small>khalilmkhalil0937@gmail.com</small></button>
+            </div>
+          </div>
+          <div class="warning-box creator-protection"><strong>Integrity and ownership notice</strong><p>Authorized releases verify their packaged files at startup. If a release is modified without authorization, Phoenix Aether will stop safely and display this notice without deleting files, blocking IP addresses, or changing user data. For authorized development, modification, redistribution, or collaboration, contact Khalil Mohammad Khalil first.</p></div>
+          <p class="notice">Use the buttons above to open the selected contact channel in your default browser or mail application.</p>
+        </section>
+      </section>
+
+      <footer>
+        <span>PHOENIX AETHER · Windows optical transfer · © 2026 Khalil Mohammad Khalil</span>
+        <span>Local optical transfer · SHA-256 integrity check · No network transport</span>
+      </footer>
+    </main>
+    <script src="../node_modules/jsqr/dist/jsQR.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

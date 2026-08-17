@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Phoenix Awaken OS style reminder: launch the owned OSINT client explicitly,
+# preserve the user's environment, and never inject provider secrets.
+exec /usr/local/bin/phoenix "$@"
+

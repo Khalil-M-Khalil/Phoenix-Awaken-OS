@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Phoenix Aether
+GenericName=Local Evidence Transfer
+Comment=Move and fingerprint files locally with Phoenix Awaken OS
+Exec=/usr/bin/phoenix-aether
+Icon=phoenix-aether
+Terminal=false
+Categories=Utility;Security;
+StartupNotify=true

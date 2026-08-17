@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /opt/phoenix-awaken
+exec python3 -m capsule.cli "$@"
