@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Phoenix Awaken OS visual identity: one local integration command.
+set -euo pipefail
+exec python3 -m capsule.integration_cli "$@"

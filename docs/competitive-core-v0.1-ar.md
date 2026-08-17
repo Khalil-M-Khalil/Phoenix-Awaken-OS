@@ -18,6 +18,19 @@
 
 ## الأوامر داخل النظام
 
+يمكن جمع نتائج الأدوات في رسم واحد محلياً عبر:
+
+```bash
+phoenix-integrate \
+  --title "Local investigation" \
+  --osint-json osint-result.json \
+  --aether-json transfer.json \
+  --security-report scan.json \
+  --out integration-output
+```
+
+ينتج الأمر `integration-graph.json` و`integration-graph.md` و`control-mappings.json`. مدخلات JSON يجب أن تكون صادرة من أدوات يملك المستخدم صلاحية تشغيلها؛ لا يرفع الأمر أي بيانات إلى خادم.
+
 بعد بناء الصورة، سيكون تصدير الرسم من capsule موجود عبر:
 
 ```bash

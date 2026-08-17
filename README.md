@@ -22,6 +22,8 @@ The prototype can create a local case, hash evidence incrementally with SHA-256,
 | Phoenix Evidence Graph | Implemented locally in Python and CLI |
 | Trust Boundary policy | Implemented with explicit transitions |
 | Aether Evidence Relay bundle | Implemented locally with manifest verification |
+| Phoenix Integrate unified CLI | Implemented for OSINT/Aether/security reports |
+| Phoenix Control Mapper v0.1 | Implemented with versioned references |
 | KDE desktop integration | Integrated into image build |
 | Daily desktop applications | Integrated into image build |
 | Phoenix Ember/Ash/Dawn/Evidence themes | Integrated into image build |
@@ -54,7 +56,7 @@ The image also includes a practical KDE desktop layer: Dolphin, Konsole, Kate, A
 
 Phoenix Ember is the default visual identity, with Phoenix Ash and Phoenix Dawn for light desktop sessions and Phoenix Evidence for neutral evidence-review work. The image carries the KDE color schemes and SVG wallpapers, while the SDDM and Plymouth surfaces use Ember as the stable boot and login boundary.
 
-The competitive core now includes a local **Phoenix Evidence Graph** and **Trust Boundary**. A graph connects cases, evidence, sources, findings, transfers, decisions, and controls. Trust transitions distinguish facts, signals, inferences, unverified automation, and operator decisions; automation cannot promote a result to fact without a human reason and evidence reference. The **Aether Evidence Relay** packages a payload with its capsule, graph, manifest, and SHA-256 verification metadata for local transfer.
+The competitive core now includes a local **Phoenix Evidence Graph** and **Trust Boundary**. A graph connects cases, evidence, sources, findings, transfers, decisions, and controls. Trust transitions distinguish facts, signals, inferences, unverified automation, and operator decisions; automation cannot promote a result to fact without a human reason and evidence reference. The **Aether Evidence Relay** packages a payload with its capsule, graph, manifest, and SHA-256 verification metadata for local transfer. `phoenix-integrate` combines OSINT JSON, Aether transfer metadata, and security reports into one local graph, while Phoenix Control Mapper records versioned NIST CSF, CIS Controls, and ISO/IEC 27001 references without claiming compliance automatically.
 
 ## Security Validation
 

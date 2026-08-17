@@ -82,3 +82,13 @@
 - [ ] Add Trust Boundary display and validation for Phoenix, Aether, security checks, and imported reports.
 - [ ] Add Aether Evidence Relay bundle format containing payload manifest, capsule, hashes, and transfer metadata.
 - [ ] Add tests for tampering, path traversal, missing provenance, invalid trust transitions, and offline operation.
+
+## Integration and GRC mapping
+
+- [ ] Inventory Phoenix OSINT output and Aether transfer metadata fields.
+- [ ] Define versioned local mappings for NIST CSF 2.0, CIS Controls, and ISO 27001 Annex A references without making automatic compliance claims.
+- [ ] Add Control Mapper records with control ID, framework, version, rationale, evidence references, and review status.
+- [ ] Add graph adapters for OSINT findings, Aether transfers, and security-scan reports.
+- [ ] Apply Trust Boundary states to imported and automated findings.
+- [ ] Add unified integration CLI and machine-readable exports.
+- [ ] Add integration tests and validate offline behavior.
