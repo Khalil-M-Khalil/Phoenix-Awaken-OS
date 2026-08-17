@@ -26,6 +26,30 @@ RUN dnf -y install \
       sddm \
       dolphin \
       konsole \
+      ark \
+      okular \
+      kate \
+      spectacle \
+      filelight \
+      kbackup \
+      kde-connect \
+      skanlite \
+      gwenview \
+      haruna \
+      elisa \
+      kdenlive \
+      gimp \
+      krita \
+      gparted \
+      kde-partitionmanager \
+      pavucontrol \
+      libreoffice \
+      p7zip \
+      p7zip-plugins \
+      unzip \
+      zip \
+      rsync \
+      smartmontools \
       NetworkManager \
       firewalld \
       python3 \
@@ -60,6 +84,7 @@ COPY packaging/phoenix-aether.desktop /usr/share/applications/phoenix-aether.des
 COPY security/phoenix-security-check /usr/bin/phoenix-security-check
 COPY security/phoenix-security-update-db /usr/bin/phoenix-security-update-db
 COPY docs/tooling-roadmap-ar.md /usr/share/doc/phoenix-awaken-os/tooling-roadmap-ar.md
+COPY docs/desktop-app-inventory-ar.md /usr/share/doc/phoenix-awaken-os/desktop-app-inventory-ar.md
 
 RUN chmod 0755 /usr/bin/phoenix-capsule /usr/bin/phoenix-aether /usr/bin/phoenix-osint /usr/bin/phoenix-security-check /usr/bin/phoenix-security-update-db \
       && curl -fsSL -o /tmp/syft.tgz "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_amd64.tar.gz" \

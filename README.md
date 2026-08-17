@@ -19,7 +19,8 @@ The prototype can create a local case, hash evidence incrementally with SHA-256,
 | Phoenix OSINT desktop integration | Integrated into image build |
 | Phoenix Aether transfer linkage | Integrated into image build |
 | Evidence Capsule provenance workflow | Integrated |
-| KDE desktop integration | In progress |
+| KDE desktop integration | Integrated into image build |
+| Daily desktop applications | Integrated into image build |
 | Fedora Atomic image | Planned |
 | Live USB and installer | Planned |
 
@@ -43,6 +44,8 @@ The planned desktop image brings together three related workflows. **Phoenix** i
 These components are deliberately separated by responsibility. Phoenix OSINT does not treat an enrichment result as proof; its reports must retain source, timestamp, status, confidence, and limitations. Aether does not silently upload files. Evidence Capsule stores verifiable metadata and operator decisions rather than pretending that a hash alone proves safety.
 
 Inside the Fedora image, Phoenix OSINT is exposed as the `Phoenix` KDE application and `/usr/bin/phoenix-osint` launcher. Aether is exposed as `Phoenix Aether`, and the capsule CLI remains available as `phoenix-capsule`. Network enrichment stays opt-in and no provider secret is embedded in the image.
+
+The image also includes a practical KDE desktop layer: Dolphin, Konsole, Kate, Ark, Okular, Gwenview, Spectacle, GIMP, Krita, Haruna, Kdenlive, GParted, KDE Partition Manager, Filelight, KBackup, KDE Connect, Skanlite, Pavucontrol, and LibreOffice. Disk partitioning tools are present for advanced users but are treated as privileged, potentially destructive operations; they must never be used casually or against an unverified device.
 
 ## Security Validation
 

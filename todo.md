@@ -43,3 +43,11 @@
 - [ ] Link generated reports to Evidence Capsule without uploading scan targets or secrets.
 - [ ] Add synthetic fixtures and negative tests for secret redaction, path validation, and report integrity.
 - [ ] Run Strix against the new wrappers and integration code before marking the bundle release-ready.
+
+## Desktop application layer
+
+- [ ] Define default applications for disk management, file management, images, audio, video, archives, documents, terminals, and backup.
+- [ ] Separate privileged or destructive tools such as GParted from ordinary user applications and document the authorization boundary.
+- [ ] Verify Fedora package names, repository availability, licenses, and KDE integration.
+- [ ] Add the approved desktop packages to the image and keep optional heavyweight tools in a separate profile.
+- [ ] Add a desktop-app inventory and offline usability checks before the VMware image test.
