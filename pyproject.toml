@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phoenix-awaken-capsule"
+version = "0.1.0"
+description = "Local-first Evidence Capsule prototype for Phoenix Awaken OS"
+requires-python = ">=3.11"
+authors = [{name = "Khalil Khalil", email = "khalilmkhalil0937@gmail.com"}]
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+phoenix-capsule = "capsule.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+include = ["capsule*"]
