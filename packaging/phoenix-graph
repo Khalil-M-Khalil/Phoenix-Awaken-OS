@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Phoenix Awaken OS visual identity: concise local graph export command.
+set -euo pipefail
+exec python3 -m capsule.graph_cli "$@"

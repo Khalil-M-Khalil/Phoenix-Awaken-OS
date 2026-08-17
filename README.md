@@ -19,6 +19,9 @@ The prototype can create a local case, hash evidence incrementally with SHA-256,
 | Phoenix OSINT desktop integration | Integrated into image build |
 | Phoenix Aether transfer linkage | Integrated into image build |
 | Evidence Capsule provenance workflow | Integrated |
+| Phoenix Evidence Graph | Implemented locally in Python and CLI |
+| Trust Boundary policy | Implemented with explicit transitions |
+| Aether Evidence Relay bundle | Implemented locally with manifest verification |
 | KDE desktop integration | Integrated into image build |
 | Daily desktop applications | Integrated into image build |
 | Phoenix Ember/Ash/Dawn/Evidence themes | Integrated into image build |
@@ -50,6 +53,8 @@ Inside the Fedora image, Phoenix OSINT is exposed as the `Phoenix` KDE applicati
 The image also includes a practical KDE desktop layer: Dolphin, Konsole, Kate, Ark, Okular, Gwenview, Spectacle, GIMP, Krita, Haruna, Kdenlive, GParted, KDE Partition Manager, Filelight, KBackup, KDE Connect, Skanlite, Pavucontrol, and LibreOffice. Disk partitioning tools are present for advanced users but are treated as privileged, potentially destructive operations; they must never be used casually or against an unverified device.
 
 Phoenix Ember is the default visual identity, with Phoenix Ash and Phoenix Dawn for light desktop sessions and Phoenix Evidence for neutral evidence-review work. The image carries the KDE color schemes and SVG wallpapers, while the SDDM and Plymouth surfaces use Ember as the stable boot and login boundary.
+
+The competitive core now includes a local **Phoenix Evidence Graph** and **Trust Boundary**. A graph connects cases, evidence, sources, findings, transfers, decisions, and controls. Trust transitions distinguish facts, signals, inferences, unverified automation, and operator decisions; automation cannot promote a result to fact without a human reason and evidence reference. The **Aether Evidence Relay** packages a payload with its capsule, graph, manifest, and SHA-256 verification metadata for local transfer.
 
 ## Security Validation
 

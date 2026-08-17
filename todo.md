@@ -60,3 +60,25 @@
 - [ ] Add SDDM and Plymouth theme scaffolds with graceful fallback if the theme package is unavailable.
 - [ ] Apply the visual tokens to Phoenix Aether and Phoenix OSINT interfaces where supported.
 - [ ] Test contrast, reduced motion, readable status colors, and theme installation in a Fedora VM.
+
+## Competitive differentiation roadmap
+
+- [ ] Define Phoenix Evidence Graph schema for files, numbers, URLs, cases, sources, findings, decisions, and controls.
+- [ ] Add Trust Boundary UX that distinguishes fact, signal, inference, and unverified automated suggestion.
+- [ ] Extend Aether to transfer an evidence bundle containing the payload, capsule manifest, hashes, and provenance.
+- [ ] Design STIX 2.1 and MISP import/export adapters with original-source and tool-version preservation.
+- [ ] Design Autopsy/TSK and Velociraptor report ingestion without attempting to replace those mature platforms.
+- [ ] Add NIST CSF 2.0, CIS Controls, and ISO 27001 mapping metadata with versioned mappings and no automatic compliance claims.
+- [ ] Add evidence profiles for Everyday Secure Desktop, OSINT Review, DFIR Triage, Evidence Review, and GRC Audit.
+- [ ] Define a local-AI triage threat model; automated summaries must remain labeled as unverified suggestions.
+- [ ] Prioritize P0/P1 features before adding fleet/server mode or a large offensive tool collection.
+
+## Competitive core implementation
+
+- [ ] Define the Phoenix Evidence Graph schema and version it.
+- [ ] Define trust states for fact, signal, inference, unverified automation, and operator decision.
+- [ ] Add provenance fields: source, timestamp, tool/version, hash, authorization context, and limitations.
+- [ ] Implement a local graph/case export without a server or cloud dependency.
+- [ ] Add Trust Boundary display and validation for Phoenix, Aether, security checks, and imported reports.
+- [ ] Add Aether Evidence Relay bundle format containing payload manifest, capsule, hashes, and transfer metadata.
+- [ ] Add tests for tampering, path traversal, missing provenance, invalid trust transitions, and offline operation.
