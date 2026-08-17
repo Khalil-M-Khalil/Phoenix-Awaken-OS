@@ -1,0 +1,29 @@
+<!-- Phoenix Awaken OS visual identity: Phoenix Ember — restrained charcoal, ember orange, warm gold, calm negative space. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" role="img" aria-label="Abstract ember phoenix wallpaper">
+  <defs>
+    <radialGradient id="emberGlow" cx="58%" cy="46%" r="42%">
+      <stop offset="0" stop-color="#d8792b" stop-opacity=".22"/>
+      <stop offset=".48" stop-color="#8f4928" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#15181b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="feather" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#8e3f25"/>
+      <stop offset=".55" stop-color="#d8792b"/>
+      <stop offset="1" stop-color="#f1b85a"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <rect width="3840" height="2160" fill="#15181b"/>
+  <rect width="3840" height="2160" fill="url(#emberGlow)"/>
+  <g opacity=".16" stroke="#f1b85a" fill="none" stroke-width="2">
+    <path d="M260 1740H1280M2560 420H3590M420 420V1740M3420 420V1740"/>
+    <path d="M540 1540H1110M2730 620H3300M690 620L1110 1040M2730 1120L3150 1540"/>
+  </g>
+  <g transform="translate(2240 1090)" fill="url(#feather)" opacity=".95">
+    <path d="M0 690C-75 470-64 260 30 40C82-82 111-214 90-390C255-235 317-45 278 130C250 257 170 360 80 440C184 357 314 282 495 278C365 430 200 522 0 690Z"/>
+    <path d="M-80 580C-440 500-700 338-904 80C-617 111-385 188-190 340C-466 152-635-56-714-340C-408-233-170-86 30 170C-8 290-35 430-80 580Z"/>
+    <path d="M104 528C444 488 748 348 1000 116C720 160 488 236 254 380C560 179 754-40 868-306C545-215 292-70 74 190C111 300 120 415 104 528Z"/>
+    <path d="M-8 716C-168 792-280 911-365 1090C-182 1008-42 918 72 796C221 930 387 1018 594 1080C484 875 330 757 116 690Z" opacity=".75"/>
+  </g>
+  <g fill="#f1b85a" opacity=".65" filter="url(#soft)"><circle cx="2150" cy="1020" r="24"/><circle cx="2570" cy="910" r="13"/><circle cx="1910" cy="1250" r="10"/></g>
+</svg>

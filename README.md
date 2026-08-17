@@ -21,6 +21,8 @@ The prototype can create a local case, hash evidence incrementally with SHA-256,
 | Evidence Capsule provenance workflow | Integrated |
 | KDE desktop integration | Integrated into image build |
 | Daily desktop applications | Integrated into image build |
+| Phoenix Ember/Ash/Dawn/Evidence themes | Integrated into image build |
+| SDDM and Plymouth Phoenix branding | Scaffolded for image build |
 | Fedora Atomic image | Planned |
 | Live USB and installer | Planned |
 
@@ -46,6 +48,8 @@ These components are deliberately separated by responsibility. Phoenix OSINT doe
 Inside the Fedora image, Phoenix OSINT is exposed as the `Phoenix` KDE application and `/usr/bin/phoenix-osint` launcher. Aether is exposed as `Phoenix Aether`, and the capsule CLI remains available as `phoenix-capsule`. Network enrichment stays opt-in and no provider secret is embedded in the image.
 
 The image also includes a practical KDE desktop layer: Dolphin, Konsole, Kate, Ark, Okular, Gwenview, Spectacle, GIMP, Krita, Haruna, Kdenlive, GParted, KDE Partition Manager, Filelight, KBackup, KDE Connect, Skanlite, Pavucontrol, and LibreOffice. Disk partitioning tools are present for advanced users but are treated as privileged, potentially destructive operations; they must never be used casually or against an unverified device.
+
+Phoenix Ember is the default visual identity, with Phoenix Ash and Phoenix Dawn for light desktop sessions and Phoenix Evidence for neutral evidence-review work. The image carries the KDE color schemes and SVG wallpapers, while the SDDM and Plymouth surfaces use Ember as the stable boot and login boundary.
 
 ## Security Validation
 

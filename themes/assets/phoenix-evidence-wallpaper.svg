@@ -1,0 +1,8 @@
+<!-- Phoenix Awaken OS visual identity: Phoenix Evidence — neutral evidence-workbench background with restrained status accents. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20252a"/><stop offset="1" stop-color="#30383d"/></linearGradient><linearGradient id="line" x1="0" x2="1"><stop stop-color="#88b7a0"/><stop offset=".5" stop-color="#d2a65c"/><stop offset="1" stop-color="#b97863"/></linearGradient></defs>
+  <rect width="3840" height="2160" fill="url(#bg)"/>
+  <g opacity=".2" stroke="#c8d1d3" fill="none" stroke-width="2"><path d="M280 420H3560M280 880H3560M280 1340H3560M280 1800H3560"/><path d="M520 240V1920M1180 240V1920M1840 240V1920M2500 240V1920M3160 240V1920"/></g>
+  <g transform="translate(2240 1090)" fill="none" stroke="url(#line)" stroke-width="18" opacity=".9"><path d="M0 620C-68 390-48 194 42 20C94-82 110-190 88-332C246-187 302-18 266 128C240 232 171 324 73 412C194 320 346 267 520 278C367 425 190 520 0 620Z"/><path d="M-70 528C-380 457-620 318-820 92C-560 118-342 190-145 332C-400 160-560-34-638-250C-359-171-146-50 43 171"/><path d="M88 500C390 460 626 332 824 126C570 153 353 224 160 351C420 181 604-8 700-216C429-146 202-28 40 171"/></g>
+  <g fill="#88b7a0"><circle cx="980" cy="620" r="10"/><circle cx="2930" cy="1530" r="10"/></g><g fill="#d2a65c"><circle cx="1210" cy="620" r="10"/><circle cx="3180" cy="1530" r="10"/></g><g fill="#b97863"><circle cx="1440" cy="620" r="10"/><circle cx="3410" cy="1530" r="10"/></g>
+</svg>

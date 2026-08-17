@@ -1,0 +1,17 @@
+# Phoenix Awaken OS visual identity: Phoenix Ember is the default system appearance.
+[General]
+ColorScheme=PhoenixEmber
+Name=Phoenix Ember
+
+[Icons]
+Theme=breeze
+
+[KDE]
+LookAndFeelPackage=org.kde.breeze.desktop
+widgetStyle=Breeze
+
+[WM]
+activeBackground=35,40,44
+activeForeground=232,237,238
+inactiveBackground=28,32,36
+inactiveForeground=155,166,172

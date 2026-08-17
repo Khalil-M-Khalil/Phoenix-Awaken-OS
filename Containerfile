@@ -85,6 +85,7 @@ COPY security/phoenix-security-check /usr/bin/phoenix-security-check
 COPY security/phoenix-security-update-db /usr/bin/phoenix-security-update-db
 COPY docs/tooling-roadmap-ar.md /usr/share/doc/phoenix-awaken-os/tooling-roadmap-ar.md
 COPY docs/desktop-app-inventory-ar.md /usr/share/doc/phoenix-awaken-os/desktop-app-inventory-ar.md
+COPY themes /opt/phoenix-awaken/themes
 
 RUN chmod 0755 /usr/bin/phoenix-capsule /usr/bin/phoenix-aether /usr/bin/phoenix-osint /usr/bin/phoenix-security-check /usr/bin/phoenix-security-update-db \
       && curl -fsSL -o /tmp/syft.tgz "https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_amd64.tar.gz" \
@@ -100,6 +101,12 @@ RUN chmod 0755 /usr/bin/phoenix-capsule /usr/bin/phoenix-aether /usr/bin/phoenix
       && tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks \
       && install -m 0755 /tmp/gitleaks /usr/local/bin/gitleaks \
       && rm -f /tmp/syft.tgz /tmp/grype.tgz /tmp/gitleaks.tgz /tmp/syft /tmp/grype /tmp/gitleaks \
+      && chmod 0755 /opt/phoenix-awaken/themes/install-phoenix-themes.sh \
+      && /opt/phoenix-awaken/themes/install-phoenix-themes.sh / \
+      && mkdir -p /usr/share/sddm/themes/phoenix /etc/sddm.conf.d /usr/share/plymouth/themes/phoenix \
+      && cp -a /opt/phoenix-awaken/themes/sddm/phoenix/. /usr/share/sddm/themes/phoenix/ \
+      && cp -a /opt/phoenix-awaken/themes/sddm/10-phoenix.conf /etc/sddm.conf.d/10-phoenix.conf \
+      && cp -a /opt/phoenix-awaken/themes/plymouth/phoenix/. /usr/share/plymouth/themes/phoenix/ \
       && python3 -m pip install --no-cache-dir --no-compile /opt/phoenix-awaken/osint \
       && python3 -m compileall -q /opt/phoenix-awaken/capsule /opt/phoenix-awaken/osint \
       && python3 -m pytest -q /opt/phoenix-awaken/osint/tests \

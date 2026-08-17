@@ -1,0 +1,13 @@
+# Phoenix Awaken OS visual identity: boot splash scaffold with safe fallback.
+[Plymouth Theme]
+Name=Phoenix Ember
+Description=Phoenix Awaken OS boot splash
+ModuleName=two-step
+
+[two-step]
+Font=Sans 12
+TitleFont=Sans Bold 24
+ImageDir=/usr/share/phoenix-awaken/themes/assets
+DialogHorizontalAlignment=0.5
+DialogVerticalAlignment=0.72
+Title=Phoenix Awaken OS

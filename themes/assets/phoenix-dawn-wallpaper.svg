@@ -1,0 +1,7 @@
+<!-- Phoenix Awaken OS visual identity: Phoenix Dawn — warm ivory, muted sunrise, readable desktop composition. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs><linearGradient id="bg" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#f4eadb"/><stop offset=".62" stop-color="#fff8ed"/><stop offset="1" stop-color="#f2d8b4"/></linearGradient><radialGradient id="sun" cx="75%" cy="25%" r="38%"><stop stop-color="#e7a04c" stop-opacity=".3"/><stop offset="1" stop-color="#e7a04c" stop-opacity="0"/></radialGradient><linearGradient id="phoenix" x1="0" x2="1"><stop stop-color="#9f4e2e"/><stop offset=".7" stop-color="#d47a32"/><stop offset="1" stop-color="#9e6b31"/></linearGradient></defs>
+  <rect width="3840" height="2160" fill="url(#bg)"/><rect width="3840" height="2160" fill="url(#sun)"/>
+  <g opacity=".2" stroke="#9f4e2e" fill="none" stroke-width="2"><path d="M260 1740H1260M2590 420H3580M420 420V1740M3420 420V1740"/><path d="M540 1540H1120M2720 620H3300"/></g>
+  <g transform="translate(2240 1090)" fill="url(#phoenix)"><path d="M0 690C-75 470-64 260 30 40C82-82 111-214 90-390C255-235 317-45 278 130C250 257 170 360 80 440C184 357 314 282 495 278C365 430 200 522 0 690Z"/><path d="M-80 580C-440 500-700 338-904 80C-617 111-385 188-190 340C-466 152-635-56-714-340C-408-233-170-86 30 170C-8 290-35 430-80 580Z"/><path d="M104 528C444 488 748 348 1000 116C720 160 488 236 254 380C560 179 754-40 868-306C545-215 292-70 74 190C111 300 120 415 104 528Z"/></g>
+</svg>

@@ -51,3 +51,12 @@
 - [ ] Verify Fedora package names, repository availability, licenses, and KDE integration.
 - [ ] Add the approved desktop packages to the image and keep optional heavyweight tools in a separate profile.
 - [ ] Add a desktop-app inventory and offline usability checks before the VMware image test.
+
+## Phoenix visual identity
+
+- [ ] Define Phoenix Ember, Ash, Dawn, and Evidence color tokens with accessible foreground/background pairs.
+- [ ] Create reusable Phoenix wallpaper and branding assets without placing large binary files inside the image build context unnecessarily.
+- [ ] Add KDE color-scheme and desktop configuration files with Ember as the default.
+- [ ] Add SDDM and Plymouth theme scaffolds with graceful fallback if the theme package is unavailable.
+- [ ] Apply the visual tokens to Phoenix Aether and Phoenix OSINT interfaces where supported.
+- [ ] Test contrast, reduced motion, readable status colors, and theme installation in a Fedora VM.
